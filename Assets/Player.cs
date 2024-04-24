@@ -1,82 +1,45 @@
-using System;
+Ôªøusing System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{ 
+{
+    public float speed = 2;
+    public GameObject sphere;
     void Start()
     {
-        // 6. IF, Switch ¡∂∞«πÆ
-
-        bool isActive = true;
-
-        if (isActive)
-        {
-            print("¿€µø ¡ﬂ¿‘¿Ã¥Ÿ.");
-        }
-        else
-        {
-            print("¡§¡ˆªÛ≈¬¿‘¥œ¥Ÿ.");
-        }
-
-        // ∫Ò±≥ ø¨ªÍ¿⁄
-        int number = 5;
-        if (number == 0) print("");
-        else if (number != 0) print("");
-        else if (number > 0) print("");
-        else if (number < 0) print("");
-        else if (number >= 0) print("");
-        else if (number <= 0) print("");
-
-        // ≥Ì∏Æ ø¨ªÍ¿⁄ AND(&&), OR(||), NOT(!)
-        if (number == 0 && isActive == true) print("");
-        else if (number == 0 || isActive == false) print("");
-        else if (!isActive) print("");
-
-        // π¯»£ø° µ˚∏• Ω√ƒˆΩ∫ ¿€µø
-        int status = 0;
-
-        switch (status)
-        {
-            case 0:
-                print("0π¯ ªÛ≈¬¿‘¥œ¥Ÿ.");
-                break;
-            case 1:
-                print("1π¯ ªÛ≈¬¿‘¥œ¥Ÿ.");
-                break;
-            case 2:
-                print("2π¯ ªÛ≈¬¿‘¥œ¥Ÿ.");
-                break;
-        }
-
-        // PLC 5√  µÙ∑π¿Ã Ω≈»£µÓ¿ª ifπÆ ∂«¥¬ switch caseπÆ¿∏∑Œ ¿€º∫«ÿ ∫æ¥œ¥Ÿ.
-        // ¡∂∞«: status / ¿˚ªˆ(0), »≤ªˆ(1), ≥Ïªˆ(2)
-        // M10(0), M11(1), M12(2) -> print("»≤ªˆ ¿¸±∏ ON");
-        // Timer -> print("5√  Timer On");
-
-        for (int i = 0; i < 3; i++)
-        {
-            if (i == 0)
-            {
-                print("¿˚ªˆ ¿¸±∏ ON");
-            }
-            if (i == 1)
-            {
-                print("»≤ªˆ ¿¸±∏ ON");
-            }
-            if (i == 2)
-            {
-                print("≥Ïªˆ ¿¸±∏ ON");
-            }
-
-            print("5√  Timer On");
-        }
+      
     }
+
 
 
     void Update()
     {
+        // Î∞©Ìñ•ÌÇ§ Ï¢åÏö∞ or A,D ÌÇ§ÏûÖÎ†• Í∞íÏùÑ Î∞òÌôò
+        float h = Input.GetAxis("Horizontal"); // -1 ~ 1
+        float v = Input.GetAxis("Vertical");
+        print(h);
+
+        // transform.Translate(Vector3.right * Time.deltaTime  * speed);
+        //Vector3 direction = (Vector3.right * h) + (Vector3.forward * v); // (1, 0, 0) * -1 = (-1, 0, 0)
+                            // x(Ï¢åÏö∞), y(ÏïûÎí§), z(ÏúÑÏïÑÎûò)
+        Vector3 direction = new Vector3(h, 0, v);
         
+        transform.position += (direction * Time.deltaTime * speed);
+
+        print("Space Button Pressed!");
+        GameObject obj = Instantiate(sphere);
+        // ÏúÑÏóêÎûë Í∞ôÏùÄ ÌëúÌòÑ List<string> strings =  new List<string>();
+
+        float randX = UnityEngine.Random.Range(0.0f, 1.0f);
+        float randY = UnityEngine.Random.Range(0.0f, 1.0f);
+        float randZ = UnityEngine.Random.Range(0.0f, 1.0f);
+        obj.transform.position = new Vector3(randX, randY, randZ);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+        }
     }
 }
