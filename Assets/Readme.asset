@@ -12,23 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
   m_Name: Readme
   m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: 727a75301c3d24613a3ebcec4a24c2c8, type: 3}
-  title: URP Empty Template
+  icon: {fileID: 2800000, guid: 6e0178a7771c65c40a3f474e485d7c93, type: 3}
+  title: Introduction to 3D Animation Systems
   sections:
-  - heading: Welcome to the Universal Render Pipeline
-    text: This template includes the settings and assets you need to start creating with the Universal Render Pipeline.
+  - heading: What is this project?
+    text: This Unity project is for the course Introduction to 3D Animation Systems.
+      It includes examples and exercises to help you apply your learning as you complete
+      the course.
     linkText: 
-    url:
-  - heading: URP Documentation
-    text:
-    linkText: Read more about URP
-    url: https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@latest
-  - heading: Forums
-    text:
-    linkText: Get answers and support
-    url: https://forum.unity.com/forums/universal-render-pipeline.383/
-  - heading: Report bugs
-    text:
-    linkText: Submit a report
-    url: https://unity3d.com/unity/qa/bug-reporting
+    url: 
+  - heading: How do I use it?
+    text: We've written a detailed course that explores and explains all the available
+      functions of 3D Animation. You can find the course on our Learn site.
+    linkText: Course Link
+    url: https://learn.unity.com/course/introduction-to-3d-animation-systems
   loadedLayout: 1
