@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Sensor : MonoBehaviour
 {
-    public bool isObjectDetected = false;
+    public bool isObjectDetected = false; // flag 변수, bool 변수
 
     private void OnTriggerEnter(Collider other)
     {

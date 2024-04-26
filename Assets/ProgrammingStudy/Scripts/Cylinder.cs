@@ -42,7 +42,7 @@ public class Cylinder : MonoBehaviour
                 else
                 {
                     sensor.isObjectDetected = false;
-                    GetComponent<Rigidbody>().velocity = Vector3.zero;
+                    GetComponent<Rigidbody>().velocity = Vector3.zero; // 작용 반작용을 Zero
 
                     // 도착 시 알림
                     arrivalTime = timer.currentTime;
