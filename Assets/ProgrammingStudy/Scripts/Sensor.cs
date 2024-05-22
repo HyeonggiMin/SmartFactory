@@ -5,6 +5,9 @@ using UnityEngine;
 public class Sensor : MonoBehaviour
 {
     public bool isObjectDetected = false; // flag 변수, bool 변수
+    public bool isMetalObject = false;
+    public MeshRenderer led;
+    
 
     private void OnTriggerEnter(Collider other)
     {

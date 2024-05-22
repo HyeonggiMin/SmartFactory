@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,8 @@ using static JSONSeriallization.Person;
 public class Piston : MonoBehaviour
 {
     public Transform pistonRod;
-    public Transform lampForward;
-    public Transform lampBackward;
+    public Transform switchForward;
+    public Transform switchBackward;
     public Image forwardButtonImg;
     public Image backwardButtonImg;
     public SensorPractice sensor;
@@ -20,18 +21,22 @@ public class Piston : MonoBehaviour
     Vector3 minPos;
     Vector3 maxPos;
     public AudioClip clip;
+    public int plcinputNumber; // Input의 개수
+    public int[] plcinputValues; // 편솔의 경우 입력 1개, 양솔의 경우 입력 2개
     
-
     void Start()
     {
         DeviceInfo info = new DeviceInfo("송출실린더", "실린더A", 55555, 5555, "2024.05.30", "2026.06.30");
         JSONSeriallization.Instance.devices.Add(info);
         AudioManager.instance.PlayAudioClip(clip);
 
-        SetActiveLampDirection(!isForward, true);
+        SetCylinderBtnActive(!isForward, true);
+        SetCylinderSwitchActive(!isForward, true);
 
         minPos = new Vector3(pistonRod.transform.localPosition.x, minRange, pistonRod.transform.localPosition.z);
         maxPos = new Vector3(pistonRod.transform.localPosition.x, maxRange, pistonRod.transform.localPosition.z);
+
+        plcinputValues = new int[plcinputNumber];
     }
 
     public void MovePistonRod(Vector3 startPos, Vector3 endPos, float _elapsedTime, float _runTime)
@@ -59,8 +64,9 @@ public class Piston : MonoBehaviour
 
     IEnumerator CoMove(bool direction)
     {
-        SetActiveLampDirection(direction, true);
         SetButtonActive(false);
+        SetCylinderBtnActive(direction, true);
+        SetCylinderSwitchActive(direction, false);
 
         float elapsedTime = 0;
 
@@ -91,23 +97,28 @@ public class Piston : MonoBehaviour
         SetButtonActive(true);
     }
 
-    void SetActiveLampDirection(bool direction, bool isActive)
+    private void SetCylinderSwitchActive(bool direction, bool isActive)
     {
         if (isActive)
         {
             if (direction != isForward)
             {
-                lampForward.GetComponent<MeshRenderer>().material.color = Color.green;
-                lampBackward.GetComponent<MeshRenderer>().material.color = Color.white;
-
+                switchBackward.GetComponent<MeshRenderer>().material.color = Color.green;
             }
             else
             {
-                lampForward.GetComponent<MeshRenderer>().material.color = Color.white;
-                lampBackward.GetComponent<MeshRenderer>().material.color = Color.green;
+                switchForward.GetComponent<MeshRenderer>().material.color = Color.green;
             }
         }
+        else
+        {
+            switchForward.GetComponent<MeshRenderer>().material.color = Color.white;
+            switchBackward.GetComponent<MeshRenderer>().material.color = Color.white;
+        }
+    }
 
+    void SetCylinderBtnActive(bool direction, bool isActive)
+    {
         if (direction == isForward)
         {
             forwardButtonImg.color = Color.green;
